@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://gclik163s5m4"]
+
+[ext_resource type="Script" path="res://scripts/Main.cs" id="1_jgxlw"]
+[ext_resource type="Resource" uid="uid://bivy1hfyeopxc" path="res://resources/Land.tres" id="2_m0pko"]
+[ext_resource type="Resource" uid="uid://c8v345io7v6xl" path="res://resources/Water.tres" id="3_x10mk"]
+[ext_resource type="Resource" uid="uid://c60ewr14wggu" path="res://resources/Sand.tres" id="4_x467m"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1vcgq"]
+size = Vector2(1, 1)
+orientation = 2
+
+[node name="Node" type="Node2D"]
+script = ExtResource("1_jgxlw")
+terrainTypes = Array[Object]([ExtResource("2_m0pko"), ExtResource("3_x10mk"), ExtResource("4_x467m")])
+
+[node name="plane" type="MeshInstance2D" parent="."]
+position = Vector2(657.5, 349.625)
+scale = Vector2(303, 237.25)
+mesh = SubResource("PlaneMesh_1vcgq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 450.0
+offset_top = 3.0
+offset_right = 824.0
+offset_bottom = 169.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Swap Modes"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="persistance" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+
+[node name="persistance label" type="Label" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="lacunarity" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 50.0
+step = 0.5
+value = 1.0
+
+[node name="lacunarity label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="scale" type="HSlider" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 10000.0
+step = 10.123
+value = 122.476
+
+[node name="scale label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="left" type="Button" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LEFT"
+
+[node name="right" type="Button" parent="VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RIGHT"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="down" type="Button" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DOWN"
+
+[node name="up" type="Button" parent="VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UP"
+
+[connection signal="button_down" from="VBoxContainer/Button" to="." method="GenerateButton"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/persistance" to="." method="PersistanceChanged"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer2/lacunarity" to="." method="LacunarityChanged"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer3/scale" to="." method="ScaleChanged"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer4/left" to="." method="OffsetXIncreased"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer4/right" to="." method="OffsetXDecreased"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer5/down" to="." method="OffsetYDecreased"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer5/up" to="." method="OffsetYIncreased"]

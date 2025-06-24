@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TerrainType" load_steps=2 format=3 uid="uid://bivy1hfyeopxc"]
+
+[ext_resource type="Script" path="res://scripts/TerrainTypes.cs" id="1_k4b5q"]
+
+[resource]
+script = ExtResource("1_k4b5q")
+_type = "Land"
+_height = 1.0
+_color = Color(0.262745, 0.501961, 0.25098, 1)
